@@ -1,5 +1,3 @@
-// workfront/scripts/application-form.js
-
 document.addEventListener("DOMContentLoaded", () => {
   /* ===============================
      PREFILL COUNTRY & JOB
@@ -76,44 +74,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ===============================
-     FORM SUBMISSION (REAL CHECK)
+     FORM SUBMISSION → PAYMENT PAGE
   =============================== */
   const form = document.getElementById("application-form");
 
   if (form) {
-    form.addEventListener("submit", async e => {
+    form.addEventListener("submit", e => {
       e.preventDefault();
 
-      const paymentId = localStorage.getItem("paymentId");
-      if (!paymentId) {
-        alert("❌ Payment required before submitting application.");
-        return;
-      }
+      // Save selected country & job for payment page
+      localStorage.setItem("selectedCountry", country);
+      localStorage.setItem("selectedJob", job);
 
-      try {
-        const res = await fetch(
-          `https://workback-c5j2.onrender.com/api/payhero/status/${paymentId}`
-        );
-        const data = await res.json();
+      // OPTIONAL: you can later serialize full form here if needed
 
-        if (data.status !== "success") {
-          alert(" Payment not completed. Please complete payment first.");
-          return;
-        }
-
-        alert(
-          "Application submitted successfully!\n\n" +
-          "We have received your application and payment.\n" +
-          "You will receive feedback via email within 3–7 days."
-        );
-
-        // TODO: send form data to backend here if needed
-        form.reset();
-        localStorage.removeItem("paymentId");
-
-      } catch (err) {
-        alert(" Error verifying payment. Please try again.");
-      }
+      // Redirect to payment page
+      window.location.href = "../pages/payment.html";
     });
   }
 });
