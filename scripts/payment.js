@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const cancelPayBtn = document.getElementById("cancel-pay-btn");
 
   const BASE_KES = 1500;
-  const BACKEND_URL = "https://workback-c5j2.onrender.com/api/payhero";
+  const BACKEND_URL = "https://workback-c5j2.onrender.com/api/payments";
 
   const currencies = {
     KSH: { symbol: "KSh", rate: 1 },
@@ -104,6 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       phoneModal.style.display = "none";
+      localStorage.setItem("paymentId", data.paymentId);
       pollPaymentStatus(data.paymentId);
     } catch {
       showToast("Failed to initiate payment", false);
@@ -123,15 +124,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (data.status === "success") {
           clearInterval(interval);
-          showToast("Payment successful. Application received ✔", true);
-          payBtn.textContent = "Application Submitted ✔";
+          showToast("Payment successful ✔", true);
+          payBtn.textContent = "Payment Completed ✔";
           payBtn.disabled = true;
           return;
         }
 
         if (data.status === "failed") {
           clearInterval(interval);
-          showToast("Payment failed. Application not submitted", false);
+          showToast("Payment failed", false);
           resetConfirmBtn();
           return;
         }
