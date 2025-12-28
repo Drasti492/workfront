@@ -1,0 +1,171 @@
+/* payment.css - Final with STK Push & Toast */
+
+:root {
+    --navy: #0F172A;
+    --teal: #14B8A6;
+    --green: #10B981;
+    --gray: #64748B;
+    --light: #F8FAFC;
+    --white: #FFFFFF;
+    --border: #E2E8F0;
+    --red: #dc2626;
+}
+
+body { background: var(--light); margin: 0; font-family: 'Inter', sans-serif; }
+
+.payment-section { padding: 80px 0; min-height: 80vh; }
+
+/* Modal */
+.modal {
+    display: flex;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: var(--white);
+    padding: 40px;
+    border-radius: 16px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+#change-currency-btn{
+    color: #fbfcfd;
+    background-color: #4ec5e9;
+}
+#change-currency-btn:hover{
+    color: #fbfcfd;
+    background-color: #1c667c;
+}
+
+#cancel-pay-btn{
+    color: #fbfcfd;
+    background-color: #4ec5e9;
+    align-items: center;
+}
+#cancel-pay-btn{
+    color: #fbfcfd;
+    background-color: #1c667c;
+}
+
+.modal h2 { color: var(--navy); margin-bottom: 15px; }
+.modal p { color: var(--gray); margin-bottom: 30px; }
+
+/* Thank You */
+.thank-you {
+    text-align: center;
+    max-width: 800px;
+    margin: 30px auto 50px;
+    font-size: 1.2rem;
+    color: var(--navy);
+    line-height: 1.7;
+    font-weight: 500;
+}
+
+/* Amount Box */
+.amount-box {
+    background: var(--white);
+    padding: 40px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin-bottom: 40px;
+}
+.amount-box h3 { font-size: 3rem; color: var(--teal); margin: 0 0 10px; }
+#final-currency { color: var(--gray); font-size: 1.2rem; margin-bottom: 20px; }
+
+.cta-secondary {
+    background: transparent;
+    border: 2px solid var(--teal);
+    color: var(--teal);
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.cta-secondary:hover {
+    background: var(--teal);
+    color: rgb(231, 233, 235);
+}
+
+/* Benefits */
+.benefits { margin: 50px 0; }
+.benefits h3 { text-align: center; color: var(--navy); margin-bottom: 30px; }
+.benefits ul { list-style: none; padding: 0; max-width: 600px; margin: 0 auto; }
+.benefits li { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; font-size: 1.1rem; color: var(--gray); }
+.benefits i { color: var(--green); font-size: 1.3rem; }
+
+.cta-primary {
+    background: var(--teal);
+    color: white;
+    padding: 16px 40px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s;
+}
+.cta-primary:hover { background: #0D9488; }
+.cta-primary:disabled { background: var(--gray); cursor: not-allowed; }
+
+.form-group { margin-bottom: 25px; text-align: left; }
+label { display: block; font-weight: 600; margin-bottom: 8px; color: var(--navy); }
+select, input[readonly] {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 1rem;
+}
+input[readonly] { background: #ECFDF5; color: var(--teal); font-weight: bold; }
+
+/* Toast */
+.toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    padding: 14px 20px;
+    border-radius: 12px;
+    color: white;
+    font-size: 14px;
+    z-index: 9999;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    display: none;
+}
+.toast.success { background: var(--green); }
+.toast.error { background: var(--red); }
+
+/* Mobile */
+@media (max-width: 768px) {
+    .modal-content { padding: 30px 20px; }
+    .amount-box h3 { font-size: 2.5rem; }
+    .thank-you { font-size: 1.1rem; padding: 0 20px; }
+}
+
+/* Loading State */
+.cta-primary.loading {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+.cta-primary.loading::after {
+  content: " ⏳";
+}
+
+/* Phone Modal Input */
+#phone-input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  font-size: 1rem;
+}

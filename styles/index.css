@@ -1,0 +1,80 @@
+:root {
+    --navy: #0F172A;
+    --teal: #14B8A6;
+    --green: #10B981;
+    --gray: #64748B;
+    --light: #F8FAFC;
+    --white: #FFFFFF;
+}
+body { margin: 0; font-family: 'Inter', sans-serif; background: var(--light); color: var(--navy); line-height: 1.6; }
+h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
+a { text-decoration: none; color: inherit; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* Navigation */
+header { background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
+.logo { font-size: 1.8rem; font-weight: 700; color: var(--navy); }
+.nav-links { display: flex; gap: 30px; }
+.nav-links a { font-weight: 500; transition: color 0.3s; }
+.nav-links a:hover { color: var(--teal); }
+.menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
+
+/* Hero */
+.hero { background: linear-gradient(to bottom, var(--navy), #1E293B); color: var(--white); text-align: center; padding: 120px 20px; }
+.hero h1 { font-size: 3.5rem; margin: 0 0 20px; }
+.hero p { font-size: 1.4rem; opacity: 0.9; max-width: 800px; margin: 0 auto 40px; }
+.cta-primary { background: var(--teal); color: var(--white); padding: 15px 40px; border-radius: 8px; font-size: 1.2rem; font-weight: 600; transition: background 0.3s; }
+.cta-primary:hover { background: #0D9488; }
+.cta-secondary { background: transparent; border: 2px solid var(--white); color: var(--white); padding: 15px 40px; border-radius: 8px; margin-left: 20px; }
+
+/* Sections */
+section { padding: 80px 0; }
+.section-title { text-align: center; font-size: 2.5rem; margin-bottom: 60px; }
+
+/* Cards */
+.countries-grid, .categories, .steps, .programs-grid, .jobs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+.card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s; padding: 20px; }
+.card:hover { transform: translateY(-10px); }
+.card img { width: 100%; height: 180px; object-fit: cover; }
+.card h3 { font-size: 1.6rem; margin: 20px 0 10px; }
+.card p { color: var(--gray); margin: 0 20px 20px; }
+
+/* Paths */
+.paths { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+.path-button { background: var(--teal); color: var(--white); padding: 20px 60px; border-radius: 12px; font-size: 1.8rem; font-weight: 600; transition: background 0.3s; }
+.path-button:hover { background: #0D9488; }
+
+/* How It Works */
+.step i { font-size: 2.5rem; color: var(--green); background: #ECFDF5; width: 80px; height: 80px; line-height: 80px; border-radius: 50%; margin-bottom: 20px; }
+
+/* Trust */
+.trust { background: var(--navy); color: var(--white); text-align: center; }
+.trust-badges { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; margin-top: 40px; }
+.badge { display: flex; align-items: center; gap: 10px; font-size: 1.2rem; }
+.badge i { font-size: 2rem; color: var(--green); }
+
+/* Forms */
+form { max-width: 600px; margin: 0 auto; background: var(--white); padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+input, select { width: 100%; padding: 15px; margin: 10px 0; border: 1px solid var(--gray); border-radius: 8px; font-size: 1rem; }
+button { background: var(--teal); color: var(--white); padding: 15px; border: none; border-radius: 8px; font-size: 1.2rem; cursor: pointer; width: 100%; margin-top: 20px; }
+#step2 { display: none; }
+
+/* FAQs */
+.faq-item { margin-bottom: 20px; }
+.faq-question { font-weight: 600; cursor: pointer; }
+.faq-answer { display: none; color: var(--gray); }
+
+/* Footer */
+footer { background: var(--navy); color: var(--white); text-align: center; padding: 40px 0; }
+
+/* Mobile */
+@media (max-width: 768px) {
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .nav-links.active { display: flex; }
+    .menu-toggle { display: block; }
+    .hero h1 { font-size: 2.5rem; }
+    .hero p { font-size: 1.2rem; }
+    .cta-secondary { margin-left: 0; margin-top: 20px; }
+    .paths { flex-direction: column; }
+}

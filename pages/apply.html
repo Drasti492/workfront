@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Form | Apply Abroad</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/application-form.css">
+    <link rel="stylesheet" href="../styles/index.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">ApplyAbroad</div>
+                <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+                <div class="nav-links">
+                    <a href="../index.html">Home</a>
+                    <a href="./countries.html">Countries</a>
+                    <a href="./how-it-works.html">How It Works</a>
+                    <a href="./about.html">About Us</a>
+                    <a href="./countries.html">Apply</a>
+                    <a href="./faqs.html">FAQs</a>
+                    <a href="./contact.html">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="application-section">
+        <div class="container">
+            <h2 class="section-title">Professional Application Form</h2>
+            <p class="subtitle">Complete your application for international opportunities. All fields are required unless marked optional.</p>
+
+            <form id="application-form" enctype="multipart/form-data">
+                <!-- Locked Pre-filled Selections -->
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>Selected Country</label>
+                        <input type="text" 
+                               id="selected-country" 
+                               class="readonly-input pre-filled" 
+                               readonly 
+                               placeholder="Will be auto-filled from your selection">
+                    </div>
+                    <div class="form-group half">
+                        <label>Selected Job / Program</label>
+                        <input type="text" 
+                               id="selected-job" 
+                               class="readonly-input pre-filled" 
+                               readonly 
+                               placeholder="Will be auto-filled from your selection">
+                    </div>
+                </div>
+
+                <p class="note" style="text-align: center; margin: 20px 0 40px; color: var(--teal); font-weight: 600; font-size: 1rem;">
+                    <i class="fas fa-info-circle"></i> 
+                    These fields show your previous selection and cannot be changed here.<br>
+                    If incorrect, please go back and choose the correct option.
+                </p>
+
+                <!-- Personal Information -->
+                <h3 class="form-heading">Personal Information</h3>
+                <div class="form-row">
+                    <div class="form-group full">
+                        <label>Full Name <span class="required">*</span></label>
+                        <input type="text" placeholder="Enter your full name as on ID/Passport" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>Age <span class="required">*</span></label>
+                        <input type="number" placeholder="Your age" min="18" required>
+                    </div>
+                    <div class="form-group half">
+                        <label>Gender (Optional)</label>
+                        <select>
+                            <option value="">Select Gender</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+                            <option>Prefer not to say</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group full">
+                        <label>Country of Residence <span class="required">*</span></label>
+                        <select required>
+                            <option value="">Select your country</option>
+                            <option>Kenya</option>
+                            <option>India</option>
+                            <option>Pakistan</option>
+                            <option>Philippines</option>
+                            <option>Bangladesh</option>
+                            <option>Nigeria</option>
+                            <option>Uganda</option>
+                            <option>Ethiopia</option>
+                            <option>Sri Lanka</option>
+                            <option>Nepal</option>
+                            <!-- Add more countries as needed -->
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>Email (Gmail preferred) <span class="required">*</span></label>
+                        <input type="email" placeholder="yourname@gmail.com" required pattern=".+@gmail\.com">
+                    </div>
+                    <div class="form-group half">
+                        <label>Phone Number <span class="required">*</span></label>
+                        <input type="tel" placeholder="+123 456 7890" required>
+                    </div>
+                </div>
+
+                <!-- Portrait Photo -->
+                <h3 class="form-heading">Portrait Photo</h3>
+                <p class="note">A clear, well-lit passport-style photo greatly increases your chances of selection.</p>
+                <div class="form-group full">
+                    <label>Upload Portrait Photo (Clear, front-facing, good lighting) <span class="required">*</span></label>
+                    <input type="file" id="portrait-photo" accept=".jpg,.jpeg,.png" required>
+                </div>
+
+                <!-- Education & Skills -->
+                <h3 class="form-heading">Education & Skills</h3>
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>Highest Education Level <span class="required">*</span></label>
+                        <select required>
+                            <option value="">Select level</option>
+                            <option>No Formal Education</option>
+                            <option>Primary School</option>
+                            <option>Secondary/High School</option>
+                            <option>Diploma/Certificate</option>
+                            <option>Bachelor's Degree</option>
+                            <option>Master's Degree</option>
+                            <option>PhD</option>
+                        </select>
+                    </div>
+                    <div class="form-group half">
+                        <label>Years of Relevant Experience <span class="required">*</span></label>
+                        <input type="number" placeholder="e.g., 3" min="0" required>
+                    </div>
+                </div>
+                <div class="form-group full">
+    <label>Languages Spoken <span class="required">*</span></label>
+
+    <div class="language-select" id="languageSelect">
+        <div class="select-display" id="selectedLanguages">
+            Select languages you speak
+        </div>
+
+        <div class="select-dropdown">
+            <label><input type="checkbox" value="English"> English</label>
+            <label><input type="checkbox" value="French"> French</label>
+            <label><input type="checkbox" value="Spanish"> Spanish</label>
+            <label><input type="checkbox" value="Arabic"> Arabic</label>
+            <label><input type="checkbox" value="Hindi"> Hindi</label>
+            <label><input type="checkbox" value="Swahili"> Swahili</label>
+            <label><input type="checkbox" value="Urdu"> Urdu</label>
+            <label><input type="checkbox" value="Bengali"> Bengali</label>
+            <label><input type="checkbox" value="Tagalog"> Tagalog</label>
+            <label><input type="checkbox" value="English (IELTS/TOEFL)"> English (IELTS/TOEFL)</label>
+            <label><input type="checkbox" value="Other"> Other</label>
+        </div>
+    </div>
+
+    <input type="hidden" name="languages" id="languagesInput" required>
+</div>
+
+
+
+                <!-- Documents -->
+                <h3 class="form-heading">Documents</h3>
+                <div class="form-group full">
+                    <label>National ID Card <span class="required">*</span></label>
+                    <input type="file" accept=".pdf,.jpg,.jpeg,.png" required>
+                </div>
+
+                <div class="form-group full">
+                    <label>Passport</label>
+                    <div class="na-checkbox">
+                        <input type="checkbox" id="passport-na">
+                        <label for="passport-na">N/A - I do not have a passport</label>
+                    </div>
+                    <input type="file" id="passport-upload" accept=".pdf,.jpg,.jpeg,.png">
+                </div>
+
+                <div class="form-group full">
+                    <label>Resume / CV <span class="recommended">(Highly Recommended)</span></label>
+                    <div class="na-checkbox">
+                        <input type="checkbox" id="resume-na">
+                        <label for="resume-na">Not Available</label>
+                    </div>
+                    <input type="file" id="resume-upload" accept=".pdf,.doc,.docx">
+                    <p class="note">Uploading a resume significantly improves your chances of being selected.</p>
+                </div>
+
+                <div class="form-group full">
+                    <label>Additional Notes (Optional)</label>
+                    <textarea rows="4" placeholder="Any specific preferences, skills, or information you'd like to share..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Application</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ApplyAbroad. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../scripts/application-form.js"></script>
+    <!-- Global Tracker - Ensures auto-fill works -->
+    <script src="../scripts/tracker.js"></script>
+</body>
+</html>
