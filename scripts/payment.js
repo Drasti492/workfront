@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const cancelPayBtn = document.getElementById("cancel-pay-btn");
 
   const BASE_KES = 1500;
-  const BACKEND_URL = "https://manual-back.onrender.com/api/payhero";
+  const BACKEND_URL = "https://workback-c5j2.onrender.com/api/payhero";
 
   const currencies = {
     KSH: { symbol: "KSh", rate: 1 },

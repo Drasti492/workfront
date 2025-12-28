@@ -1,5 +1,3 @@
-// scripts/tracker.js - FINAL 100% WORKING VERSION
-
 // Use delegation for bulletproof click capturing
 document.addEventListener('click', function (e) {
     const link = e.target.closest('a[data-country], button[data-country]');

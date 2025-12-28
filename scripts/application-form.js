@@ -92,17 +92,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
         const res = await fetch(
-          `https://manual-back.onrender.com/api/payhero/status/${paymentId}`
+          `https://workback-c5j2.onrender.com/api/payhero/status/${paymentId}`
         );
         const data = await res.json();
 
         if (data.status !== "success") {
-          alert("❌ Payment not completed. Please complete payment first.");
+          alert(" Payment not completed. Please complete payment first.");
           return;
         }
 
         alert(
-          "✅ Application submitted successfully!\n\n" +
+          "Application submitted successfully!\n\n" +
           "We have received your application and payment.\n" +
           "You will receive feedback via email within 3–7 days."
         );
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.removeItem("paymentId");
 
       } catch (err) {
-        alert("❌ Error verifying payment. Please try again.");
+        alert(" Error verifying payment. Please try again.");
       }
     });
   }
