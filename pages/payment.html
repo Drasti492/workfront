@@ -1,133 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Application Support Contribution | Apply Abroad</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../styles/payment.css">
-    <link rel="stylesheet" href="../styles/index.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Application Support Contribution | Apply Abroad</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../styles/payment.css">
+  <link rel="stylesheet" href="../styles/index.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">ApplyAbroad</div>
-                <div class="menu-toggle"><i class="fas fa-bars"></i></div>
-                <div class="nav-links">
-                    <a href="../index.html">Home</a>
-                    <a href="./countries.html">Countries</a>
-                    <a href="./how-it-works.html">How It Works</a>
-                    <a href="./about.html">About Us</a>
-                    <a href="./countries.html">Apply</a>
-                    <a href="./faqs.html">FAQs</a>
-                    <a href="./contact.html">Contact</a>
-                </div>
-            </nav>
-        </div>
-    </header>
 
-    <!-- Currency Selection Modal (Pops on load) -->
-    <div id="currency-modal" class="modal">
-        <div class="modal-content">
-            <h2>Select Payment Currency</h2>
-            <p>Your Application Support Contribution is <strong>KSh 1,500</strong>.<br>Select a currency to see the equivalent amount.</p>
+<header>
+  <div class="container">
+    <nav>
+      <div class="logo">ApplyAbroad</div>
+      <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="./countries.html">Countries</a>
+        <a href="./how-it-works.html">How It Works</a>
+        <a href="./about.html">About Us</a>
+        <a href="./countries.html">Apply</a>
+        <a href="./faqs.html">FAQs</a>
+        <a href="./contact.html">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
 
-            <div class="form-group">
-                <label for="currency-select">Choose Currency</label>
-                <select id="currency-select">
-                    <option value="KSH">KSh - Kenyan Shilling </option>
-                    <option value="USD">$ - US Dollar</option>
-                    <option value="EUR">€ - Euro</option>
-                    <option value="GBP">£ - British Pound</option>
-                    <option value="NGN">₦ - Nigerian Naira</option>
-                    <option value="INR">₹ - Indian Rupee</option>
-                </select>
-            </div>
+<!-- Currency Modal -->
+<div id="currency-modal" class="modal">
+  <div class="modal-content">
+    <h2>Select Payment Currency</h2>
+    <p>Your Application Support Contribution is <strong>KSh 1,500</strong>.</p>
 
-            <div class="form-group">
-                <label>Amount to Pay</label>
-                <input type="text" id="converted-amount" readonly value="KSh 1,500">
-            </div>
-
-            <button id="continue-btn" class="cta-primary">Continue</button>
-        </div>
+    <div class="form-group">
+      <label>Choose Currency</label>
+      <select id="currency-select">
+        <option value="KSH">KSh - Kenyan Shilling</option>
+        <option value="USD">$ - US Dollar</option>
+        <option value="EUR">€ - Euro</option>
+        <option value="GBP">£ - British Pound</option>
+        <option value="NGN">₦ - Nigerian Naira</option>
+        <option value="INR">₹ - Indian Rupee</option>
+      </select>
     </div>
 
-    <!-- Main Payment Section -->
-    <section class="payment-section" id="main-payment" style="display: none;">
-        <div class="container">
-            <h2 class="section-title">Application Support Contribution</h2>
-            <p class="thank-you">Thank you for choosing ApplyAbroad. Your contribution helps us provide dedicated support and faster processing for your application journey.</p>
+    <div class="form-group">
+      <label>Amount to Pay</label>
+      <input type="text" id="converted-amount" readonly />
+    </div>
 
-            <div class="amount-box">
-                <h3 id="final-amount">KSh 1,500</h3>
-                <p id="final-currency">(Kenyan Shilling)</p>
-                <button id="change-currency-btn" class="cta-secondary">Change Currency</button>
-            </div>
+    <button id="continue-btn" class="cta-primary">Continue</button>
+  </div>
+</div>
 
-            <div class="benefits">
-                <h3>Benefits of Your Contribution</h3>
-                <ul>
-                    <li><i class="fas fa-check-circle"></i> Real-time application monitoring and updates</li>
-                    <li><i class="fas fa-check-circle"></i> Priority processing with verified partners</li>
-                    <li><i class="fas fa-check-circle"></i> Personalized document review and guidance</li>
-                    <li><i class="fas fa-check-circle"></i> Faster response from our support team</li>
-                    <li><i class="fas fa-check-circle"></i> Secure handling and submission of your documents</li>
-                </ul>
-            </div>
+<!-- Main Payment -->
+<section class="payment-section" id="main-payment" style="display:none;">
+  <div class="container">
+    <h2 class="section-title">Application Support Contribution</h2>
 
-            <!-- Hidden fields for backend -->
-            <form id="payment-form">
-                <input type="hidden" name="selected_country" id="hidden-country">
-                <input type="hidden" name="selected_category" id="hidden-category">
-                <input type="hidden" name="amount_ksh" value="1500">
-                <input type="hidden" name="currency" id="hidden-currency">
-                <input type="hidden" name="converted_amount" id="hidden-amount">
+    <div class="amount-box">
+      <h3 id="final-amount">KSh 1,500</h3>
+      <p id="final-currency">(Kenyan Shilling)</p>
+      <button id="change-currency-btn" class="cta-secondary">Change Currency</button>
+    </div>
 
-                <button type="button" id="pay-btn" class="cta-primary">Complete Contribution & Submit Application</button>
-            </form>
-        </div>
-    </section>
+    <div class="benefits">
+      <h3>Benefits</h3>
+      <ul>
+        <li><i class="fas fa-check-circle"></i> Priority application processing</li>
+        <li><i class="fas fa-check-circle"></i> Dedicated support</li>
+        <li><i class="fas fa-check-circle"></i> Secure document handling</li>
+      </ul>
+    </div>
 
+    <button id="pay-btn" class="cta-primary">
+      Complete Contribution & Submit Application
+    </button>
+  </div>
+</section>
 
-    <!-- Phone Number Modal -->
+<!-- Phone Modal -->
 <div id="phone-modal" class="modal" style="display:none;">
   <div class="modal-content">
     <h2>Confirm Payment</h2>
-    <p>Enter your M-Pesa phone number to complete your application.</p>
+    <p>Enter your M-Pesa phone number</p>
 
     <div class="form-group">
-      <label for="phone-input">M-Pesa Phone Number</label>
-      <input
-        type="tel"
-        id="phone-input"
-        placeholder="07XXXXXXXX"
-        maxlength="10"
-      />
+      <input type="tel" id="phone-input" placeholder="07XXXXXXXX" maxlength="10" />
     </div>
 
     <button id="confirm-pay-btn" class="cta-primary">
       Pay & Submit Application
     </button>
-
-    <button id="cancel-pay-btn" class="cta-secondary" style="margin-top:12px;">
-      Cancel
-    </button>
   </div>
 </div>
 
+<!-- PAYMENT PROCESSING MODAL -->
+<div id="payment-loading-modal" class="modal" style="display:none;">
+  <div class="modal-content payment-loading">
+    <div class="spinner"></div>
 
-    <!-- Toast Notification -->
-    <div id="payment-toast" class="toast"></div>
+    <h2 id="loading-title">Waiting for Payment Confirmation</h2>
+    <p id="loading-message">
+      Please check your phone and enter your M-Pesa PIN
+    </p>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 ApplyAbroad. All rights reserved.</p>
-        </div>
-    </footer>
+    <div id="payment-result" style="display:none;">
+      <i id="result-icon" class="fas"></i>
+      <p id="result-text"></p>
+    </div>
+  </div>
+</div>
 
-    <script src="../scripts/payment.js"></script>
+<div id="payment-toast" class="toast"></div>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2025 ApplyAbroad. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="../scripts/payment.js"></script>
 </body>
 </html>

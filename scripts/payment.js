@@ -6,14 +6,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const continueBtn = document.getElementById("continue-btn");
   const changeBtn = document.getElementById("change-currency-btn");
   const payBtn = document.getElementById("pay-btn");
-  const finalAmount = document.getElementById("final-amount");
-  const finalCurrency = document.getElementById("final-currency");
-  const toast = document.getElementById("payment-toast");
 
   const phoneModal = document.getElementById("phone-modal");
   const phoneInput = document.getElementById("phone-input");
   const confirmPayBtn = document.getElementById("confirm-pay-btn");
-  const cancelPayBtn = document.getElementById("cancel-pay-btn");
+
+  const loadingModal = document.getElementById("payment-loading-modal");
+  const loadingTitle = document.getElementById("loading-title");
+  const loadingMessage = document.getElementById("loading-message");
+  const paymentResult = document.getElementById("payment-result");
+  const resultIcon = document.getElementById("result-icon");
+  const resultText = document.getElementById("result-text");
 
   const BASE_KES = 1500;
   const BACKEND_URL = "https://workback-c5j2.onrender.com/api/payments";
@@ -27,33 +30,17 @@ document.addEventListener("DOMContentLoaded", () => {
     INR: { symbol: "₹", rate: 1.55 }
   };
 
-  function showToast(msg, success = true) {
-    toast.textContent = msg;
-    toast.className = `toast ${success ? "success" : "error"}`;
-    toast.style.display = "block";
-    setTimeout(() => (toast.style.display = "none"), 5000);
-  }
-
   function updateAmount() {
     const cur = currencySelect.value;
     const info = currencies[cur];
-    const amount =
-      cur === "KSH" ? BASE_KES : (BASE_KES / info.rate).toFixed(2);
+    const amount = cur === "KSH" ? BASE_KES : (BASE_KES / info.rate).toFixed(2);
     convertedAmountInput.value = `${info.symbol} ${amount}`;
   }
 
-  currencySelect.addEventListener("change", updateAmount);
   updateAmount();
+  currencySelect.addEventListener("change", updateAmount);
 
   continueBtn.onclick = () => {
-    const cur = currencySelect.value;
-    const info = currencies[cur];
-    const amount =
-      cur === "KSH" ? BASE_KES : (BASE_KES / info.rate).toFixed(2);
-
-    finalAmount.textContent = `${info.symbol} ${amount}`;
-    finalCurrency.textContent = `(In ${cur})`;
-
     modal.style.display = "none";
     mainSection.style.display = "block";
   };
@@ -63,32 +50,22 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.style.display = "flex";
   };
 
-  function normalizePhone(phone) {
-    phone = phone.replace(/\D/g, "");
-    if (phone.startsWith("0")) phone = "254" + phone.slice(1);
-    if (!phone.startsWith("254") || phone.length !== 12) return null;
-    return phone;
-  }
-
   payBtn.onclick = () => {
     phoneModal.style.display = "flex";
   };
 
-  cancelPayBtn.onclick = () => {
-    phoneModal.style.display = "none";
-    phoneInput.value = "";
-  };
+  function normalizePhone(phone) {
+    phone = phone.replace(/\D/g, "");
+    if (phone.startsWith("0")) phone = "254" + phone.slice(1);
+    return phone.length === 12 && phone.startsWith("254") ? phone : null;
+  }
 
   confirmPayBtn.onclick = async () => {
     const phone = normalizePhone(phoneInput.value);
+    if (!phone) return;
 
-    if (!phone) {
-      showToast("Invalid phone number", false);
-      return;
-    }
-
-    confirmPayBtn.classList.add("loading");
-    confirmPayBtn.disabled = true;
+    phoneModal.style.display = "none";
+    loadingModal.style.display = "flex";
 
     try {
       const res = await fetch(`${BACKEND_URL}/stk-push`, {
@@ -98,60 +75,59 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       const data = await res.json();
+      if (!res.ok || !data.paymentId) throw new Error();
 
-      if (!res.ok || !data.paymentId) {
-        throw new Error();
-      }
-
-      phoneModal.style.display = "none";
-      localStorage.setItem("paymentId", data.paymentId);
-      pollPaymentStatus(data.paymentId);
+      pollStatus(data.paymentId);
     } catch {
-      showToast("Failed to initiate payment", false);
-      resetConfirmBtn();
+      showFailure();
     }
   };
 
-  function pollPaymentStatus(paymentId) {
+  function pollStatus(paymentId) {
     let attempts = 0;
 
-    const interval = setInterval(async () => {
+    const timer = setInterval(async () => {
       attempts++;
-
       try {
         const res = await fetch(`${BACKEND_URL}/status/${paymentId}`);
         const data = await res.json();
 
         if (data.status === "success") {
-          clearInterval(interval);
-          showToast("Payment successful ✔", true);
-          payBtn.textContent = "Payment Completed ✔";
-          payBtn.disabled = true;
-          return;
+          clearInterval(timer);
+          showSuccess();
         }
 
         if (data.status === "failed") {
-          clearInterval(interval);
-          showToast("Payment failed", false);
-          resetConfirmBtn();
-          return;
+          clearInterval(timer);
+          showFailure();
         }
 
-        if (attempts >= 25) {
-          clearInterval(interval);
-          showToast("Payment timed out", false);
-          resetConfirmBtn();
+        if (attempts >= 30) {
+          clearInterval(timer);
+          showFailure();
         }
       } catch {
-        clearInterval(interval);
-        showToast("Error checking payment status", false);
-        resetConfirmBtn();
+        clearInterval(timer);
+        showFailure();
       }
     }, 3000);
   }
 
-  function resetConfirmBtn() {
-    confirmPayBtn.classList.remove("loading");
-    confirmPayBtn.disabled = false;
+  function showSuccess() {
+    loadingTitle.textContent = "Payment Successful";
+    loadingMessage.textContent = "";
+    paymentResult.style.display = "block";
+    resultIcon.className = "fas fa-check-circle success";
+    resultText.textContent = "Application submitted successfully ✔";
+    payBtn.disabled = true;
+    payBtn.textContent = "Application Submitted ✔";
+  }
+
+  function showFailure() {
+    loadingTitle.textContent = "Payment Failed";
+    loadingMessage.textContent = "";
+    paymentResult.style.display = "block";
+    resultIcon.className = "fas fa-times-circle error";
+    resultText.textContent = "Payment was declined. Application not submitted.";
   }
 });
