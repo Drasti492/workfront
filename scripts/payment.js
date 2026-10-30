@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const resultIcon = document.getElementById("result-icon");
   const resultText = document.getElementById("result-text");
 
-  const BASE_KES = 18;
+  const BASE_KES = 7500;
   const BACKEND_URL = "https://workback-c5j2.onrender.com/api/payments";
 
   const currencies = {
