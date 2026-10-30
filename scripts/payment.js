@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const resultIcon = document.getElementById("result-icon");
   const resultText = document.getElementById("result-text");
 
-  const BASE_KES = 450;
+  const BASE_KES = 7500;
   const BACKEND_URL = "https://workback-c5j2.onrender.com/api/payments";
 
   const currencies = {
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
     resultIcon.className = "fas fa-check-circle success";
     resultText.textContent = "Application submitted successfully ✔";
     payBtn.disabled = true;
-    payBtn.textContent = "Application Submitted ✔";
+    payBtn.textContent = "Application Submitted Kindly Wait As We Verify Your Documents. ✔";
   }
 
   function showFailure() {
